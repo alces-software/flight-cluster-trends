@@ -105,8 +105,8 @@ const getStyles = (theme: GrafanaTheme2) => ({
   mobileHeader: css({
     display: 'flex',
     justifyContent: 'space-between',
-    padding: theme.spacing(1, 1, 1, 2),
     borderBottom: `1px solid ${theme.colors.border.weak}`,
+    paddingTop: theme.spacing(4),
 
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -117,10 +117,10 @@ const getStyles = (theme: GrafanaTheme2) => ({
     display: 'flex',
     flexDirection: 'column',
     listStyleType: 'none',
-    padding: theme.spacing(1, 1, 2, 1),
     [theme.breakpoints.up('md')]: {
       width: MENU_WIDTH,
     },
+    paddingTop: theme.spacing(4),
   }),
   dockMenuButton: css({
     display: 'none',

@@ -3,13 +3,12 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLocalStorage } from 'react-use';
 
-import { GrafanaTheme2, NavModelItem, toIconName } from '@grafana/data';
-import { useStyles2, Text, IconButton, Icon } from '@grafana/ui';
+import { GrafanaTheme2, NavModelItem } from '@grafana/data';
+import { useStyles2, Text, IconButton } from '@grafana/ui';
 import { useGrafana } from 'app/core/context/GrafanaContext';
 
 import { Indent } from '../../Indent/Indent';
 
-import { FeatureHighlight } from './FeatureHighlight';
 import { MegaMenuItemText } from './MegaMenuItemText';
 import { hasChildMatch } from './utils';
 
@@ -18,16 +17,16 @@ interface Props {
   activeItem?: NavModelItem;
   onClick?: () => void;
   level?: number;
+  isChild?: boolean;
 }
 
 const MAX_DEPTH = 2;
 
-export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
+export function MegaMenuItem({ link, activeItem, level = 0, onClick, isChild = false }: Props) {
   const { chrome } = useGrafana();
   const state = chrome.useState();
   const menuIsDocked = state.megaMenuDocked;
   const location = useLocation();
-  const FeatureHighlightWrapper = link.highlightText ? FeatureHighlight : React.Fragment;
   const hasActiveChild = hasChildMatch(link, activeItem);
   const isActive = link === activeItem || (level === MAX_DEPTH && hasActiveChild);
   const [sectionExpanded, setSectionExpanded] = useLocalStorage(
@@ -37,7 +36,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
   const showExpandButton = level < MAX_DEPTH && Boolean(linkHasChildren(link) || link.emptyMessage);
   const item = useRef<HTMLLIElement>(null);
 
-  const styles = useStyles2(getStyles);
+  const styles = useStyles2(getStyles, isChild);
 
   // expand parent sections if child is active
   useEffect(() => {
@@ -63,6 +62,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
     <li ref={item} className={styles.listItem}>
       <div
         className={cx(styles.menuItem, {
+          [styles.activeListItem]: Boolean(level === 0 && (isActive || hasActiveChild)),
           [styles.menuItemWithIcon]: Boolean(level === 0 && link.icon),
         })}
       >
@@ -83,6 +83,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
         <div className={styles.collapsibleSectionWrapper}>
           <MegaMenuItemText
             isActive={isActive}
+            isChild={isChild}
             onClick={() => {
               link.onClick?.();
               onClick?.();
@@ -96,12 +97,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
                 [styles.labelWrapperWithIcon]: Boolean(level === 0 && link.icon),
               })}
             >
-              {level === 0 && link.icon && (
-                <FeatureHighlightWrapper>
-                  <Icon className={styles.icon} name={toIconName(link.icon) ?? 'link'} size="lg" />
-                </FeatureHighlightWrapper>
-              )}
-              <Text truncate>{link.text}</Text>
+              <Text truncate>{isChild ? link.text : link.text.toUpperCase()}</Text>
             </div>
           </MegaMenuItemText>
         </div>
@@ -118,6 +114,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
                   activeItem={activeItem}
                   onClick={onClick}
                   level={level + 1}
+                  isChild={true}
                 />
               ))
           ) : (
@@ -131,7 +128,7 @@ export function MegaMenuItem({ link, activeItem, level = 0, onClick }: Props) {
   );
 }
 
-const getStyles = (theme: GrafanaTheme2) => ({
+const getStyles = (theme: GrafanaTheme2, isChild: Props['isChild']) => ({
   icon: css({
     width: theme.spacing(3),
   }),
@@ -139,11 +136,14 @@ const getStyles = (theme: GrafanaTheme2) => ({
     flex: 1,
     maxWidth: '100%',
   }),
+  activeListItem: css({
+    backgroundImage: `linear-gradient(to bottom right, ${theme.colors.text.secondary}, #D02CC0)`,
+  }),
   menuItem: css({
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(1),
-    height: theme.spacing(4),
+    height: theme.spacing(isChild ? 4 : 6),
     paddingLeft: theme.spacing(0.5),
     position: 'relative',
   }),

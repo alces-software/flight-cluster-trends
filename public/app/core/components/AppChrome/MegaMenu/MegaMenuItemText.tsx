@@ -11,11 +11,12 @@ export interface Props {
   onClick?: () => void;
   target?: HTMLAnchorElement['target'];
   url: string;
+  isChild?: boolean;
 }
 
-export function MegaMenuItemText({ children, isActive, onClick, target, url }: Props) {
+export function MegaMenuItemText({ children, isActive, onClick, target, url, isChild = false }: Props) {
   const theme = useTheme2();
-  const styles = getStyles(theme, isActive);
+  const styles = getStyles(theme, isActive, isChild);
   const LinkComponent = !target && url.startsWith('/') ? Link : 'a';
 
   const linkContent = (
@@ -46,17 +47,16 @@ export function MegaMenuItemText({ children, isActive, onClick, target, url }: P
 
 MegaMenuItemText.displayName = 'MegaMenuItemText';
 
-const getStyles = (theme: GrafanaTheme2, isActive: Props['isActive']) => ({
+const getStyles = (theme: GrafanaTheme2, isActive: Props['isActive'], isChild: Props['isChild']) => ({
   container: css({
     alignItems: 'center',
-    color: isActive ? theme.colors.text.primary : theme.colors.text.secondary,
+    color: (isActive && !isChild) || (!isActive && isChild) ? theme.colors.text.primary : theme.colors.text.secondary,
     height: '100%',
     position: 'relative',
     width: '100%',
 
     '&:hover, &:focus-visible': {
-      color: theme.colors.text.primary,
-      textDecoration: 'underline',
+      color: theme.colors.text.hover,
     },
 
     '&:focus-visible': {
@@ -67,21 +67,9 @@ const getStyles = (theme: GrafanaTheme2, isActive: Props['isActive']) => ({
     },
   }),
   containerActive: css({
-    backgroundColor: theme.colors.background.secondary,
     borderTopRightRadius: theme.shape.radius.default,
     borderBottomRightRadius: theme.shape.radius.default,
     position: 'relative',
-
-    '&::before': {
-      backgroundImage: theme.colors.gradients.brandVertical,
-      borderRadius: theme.shape.radius.default,
-      content: '" "',
-      display: 'block',
-      height: '100%',
-      position: 'absolute',
-      transform: 'translateX(-50%)',
-      width: theme.spacing(0.5),
-    },
   }),
   linkContent: css({
     alignItems: 'center',

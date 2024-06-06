@@ -21,6 +21,7 @@ export interface ThemeColorsBase<TColor> {
   text: {
     primary: string;
     secondary: string;
+    hover?: string;
     disabled: string;
     link: string;
     /** Used for auto white or dark text on colored backgrounds */
@@ -101,7 +102,8 @@ class DarkColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
 
   text = {
     primary: `rgb(${this.whiteBase})`,
-    secondary: `rgba(${this.whiteBase}, 0.65)`,
+    secondary: `#F21398`,
+    hover: `#FA89CC`,
     disabled: `rgba(${this.whiteBase}, 0.6)`,
     link: palette.blueDarkText,
     maxContrast: palette.white,
