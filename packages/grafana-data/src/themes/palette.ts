@@ -3,9 +3,9 @@ export const palette = {
   black: '#000000',
 
   gray25: '#2c3235',
-  gray15: '#22252b', //'#202226',
-  gray10: '#181b1f', // old '#141619',
-  gray05: '#111217', // old '#0b0c0e',
+  gray15: '#20253E', //'#202226',
+  gray10: '#171B2E', // old '#141619',
+  gray05: '#111526', // old '#0b0c0e',
 
   // new from figma,
   darkLayer0: '#18181A',
