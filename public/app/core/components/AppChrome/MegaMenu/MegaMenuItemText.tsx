@@ -56,7 +56,7 @@ const getStyles = (theme: GrafanaTheme2, isActive: Props['isActive'], isChild: P
     width: '100%',
 
     '&:hover, &:focus-visible': {
-      color: theme.colors.text.hover,
+      color: !isActive || isChild ? theme.colors.text.hover : theme.colors.text.primary,
     },
 
     '&:focus-visible': {
