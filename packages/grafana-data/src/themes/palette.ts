@@ -2,10 +2,10 @@ export const palette = {
   white: '#FFFFFF',
   black: '#000000',
 
-  gray25: '#2c3235',
-  gray15: '#20253E', //'#202226',
-  gray10: '#171B2E', // old '#141619',
-  gray05: '#111526', // old '#0b0c0e',
+  gray25: '#2E375E',
+  gray15: '#20253E',
+  gray10: '#171B2E',
+  gray05: '#111526',
 
   // new from figma,
   darkLayer0: '#18181A',
@@ -24,8 +24,8 @@ export const palette = {
   // from figma
   lightBorder1: '#E4E7E7',
 
-  blueDarkMain: '#3D71D9', // '#4165F5',
-  blueDarkText: '#6E9FFF', // '#58a6ff', //'#33a2e5', // '#5790FF',
+  blueDarkMain: '#2794D8',
+  blueDarkText: '#2794D8',
   redDarkMain: '#D10E5C',
   redDarkText: '#FF5286',
   greenDarkMain: '#1A7F4B',
