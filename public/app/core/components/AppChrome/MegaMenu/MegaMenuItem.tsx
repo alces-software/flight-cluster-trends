@@ -145,6 +145,7 @@ const getStyles = (theme: GrafanaTheme2, isChild: Props['isChild']) => ({
     gap: theme.spacing(1),
     height: theme.spacing(isChild ? 4 : 6),
     paddingLeft: theme.spacing(0.5),
+    marginTop: isChild ? '0' : theme.spacing(2),
     position: 'relative',
   }),
   menuItemWithIcon: css({
