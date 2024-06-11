@@ -22,7 +22,6 @@ export interface ThemeComponents {
   panel: {
     padding: number;
     headerHeight: number;
-    borderColor: string;
     boxShadow: string;
     background: string;
   };
@@ -56,10 +55,9 @@ export interface ThemeComponents {
 
 export function createComponents(colors: ThemeColors, shadows: ThemeShadows): ThemeComponents {
   const panel = {
-    padding: 1,
+    padding: 3,
     headerHeight: 4,
     background: colors.background.primary,
-    borderColor: colors.border.weak,
     boxShadow: 'none',
   };
 

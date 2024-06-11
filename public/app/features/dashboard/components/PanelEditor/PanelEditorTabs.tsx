@@ -128,9 +128,6 @@ const getStyles = (theme: GrafanaTheme2) => {
       flex: 1;
       min-height: 0;
       background: ${theme.colors.background.primary};
-      border: 1px solid ${theme.components.panel.borderColor};
-      border-left: none;
-      border-bottom: none;
       border-top-right-radius: ${theme.shape.borderRadius(1.5)};
     `,
   };

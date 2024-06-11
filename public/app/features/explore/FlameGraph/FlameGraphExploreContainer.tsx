@@ -42,7 +42,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
     background: theme.colors.background.primary,
     display: 'flow-root',
     padding: theme.spacing(0, 1, 1, 1),
-    border: `1px solid ${theme.components.panel.borderColor}`,
     borderRadius: theme.shape.radius.default,
   }),
 });

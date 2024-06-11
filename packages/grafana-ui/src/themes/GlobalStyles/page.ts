@@ -66,7 +66,6 @@ export function getPageStyles(theme: GrafanaTheme2) {
     '.page-body': {
       padding: theme.spacing(1),
       background: theme.components.panel.background,
-      border: `1px solid ${theme.components.panel.borderColor}`,
       marginBottom: '32px',
 
       [theme.breakpoints.up('md')]: {

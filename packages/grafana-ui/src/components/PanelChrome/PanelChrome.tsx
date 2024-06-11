@@ -221,9 +221,6 @@ export function PanelChrome({
           </Tooltip>
         </DelayRender>
       )}
-      <div className={styles.rightAligned}>
-        {actions && <div className={styles.rightActions}>{itemsRenderer(actions, (item) => item)}</div>}
-      </div>
     </>
   );
 
@@ -345,18 +342,19 @@ const getContentStyle = (
 };
 
 const getStyles = (theme: GrafanaTheme2) => {
-  const { background, borderColor, padding } = theme.components.panel;
+  const { background, padding } = theme.components.panel;
 
   return {
     container: css({
       label: 'panel-container',
       backgroundColor: background,
-      border: `1px solid ${borderColor}`,
       position: 'relative',
       borderRadius: theme.shape.radius.default,
+      padding: '24px',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
 
       '.show-on-hover': {
         opacity: '0',
@@ -386,9 +384,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       backgroundColor: 'transparent',
       border: '1px solid transparent',
       boxSizing: 'border-box',
-      '&:hover': {
-        border: `1px solid ${borderColor}`,
-      },
+      '&:hover': {},
     }),
     loadingBarContainer: css({
       label: 'panel-loading-bar-container',
@@ -403,11 +399,18 @@ const getStyles = (theme: GrafanaTheme2) => {
       label: 'panel-content',
       flexGrow: 1,
       contain: 'size layout',
+      maxWidth: '100%',
+      padding: '8px 0 !important',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     }),
     headerContainer: css({
       label: 'panel-header',
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
     }),
     pointer: css({
       cursor: 'pointer',
@@ -425,7 +428,6 @@ const getStyles = (theme: GrafanaTheme2) => {
       label: 'panel-title',
       display: 'flex',
       marginBottom: 0, // override default h6 margin-bottom
-      padding: theme.spacing(0, padding),
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
@@ -445,6 +447,9 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
     menuItem: css({
       label: 'panel-menu',
+      position: 'absolute',
+      top: '5px',
+      right: '5px',
       border: 'none',
       background: theme.colors.secondary.main,
       '&:hover': {
@@ -460,7 +465,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
     rightActions: css({
       display: 'flex',
-      padding: theme.spacing(0, padding),
+      padding: theme.spacing(0, 0),
       gap: theme.spacing(1),
     }),
     rightAligned: css({
