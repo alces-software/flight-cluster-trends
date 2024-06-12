@@ -294,11 +294,6 @@ export function PanelChrome({
   );
 }
 
-const itemsRenderer = (items: ReactNode[] | ReactNode, renderer: (items: ReactNode[]) => ReactNode): ReactNode => {
-  const toRender = React.Children.toArray(items).filter(Boolean);
-  return toRender.length > 0 ? renderer(toRender) : null;
-};
-
 const getHeaderHeight = (theme: GrafanaTheme2, hasHeader: boolean) => {
   if (hasHeader) {
     return theme.spacing.gridSize * theme.components.panel.headerHeight;
@@ -342,7 +337,7 @@ const getContentStyle = (
 };
 
 const getStyles = (theme: GrafanaTheme2) => {
-  const { background, padding } = theme.components.panel;
+  const { background } = theme.components.panel;
 
   return {
     container: css({
@@ -399,7 +394,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       label: 'panel-content',
       flexGrow: 1,
       contain: 'size layout',
-      maxWidth: '100%',
+      width: '100%',
       padding: '8px 0 !important',
       display: 'flex',
       justifyContent: 'center',
