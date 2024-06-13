@@ -406,6 +406,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       alignItems: 'center',
       justifyContent: 'center',
       width: '100%',
+      zIndex: '2',
     }),
     pointer: css({
       cursor: 'pointer',

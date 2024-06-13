@@ -189,10 +189,12 @@ export abstract class BigValueLayout {
 
     const panelStyles: CSSProperties = {
       width: `${width}px`,
-      height: `${height}px`,
+      height: `${height + 8 + 24}px`,
       padding: `${textMode === BigValueTextMode.None ? 2 : this.panelPadding}px`,
       borderRadius: theme.shape.radius.default,
       position: 'relative',
+      left: `-${width / 2}px`,
+      top: `-${height / 2 + 8 + 24}px`,
       display: 'flex',
     };
 
