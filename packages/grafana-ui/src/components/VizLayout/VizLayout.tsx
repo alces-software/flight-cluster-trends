@@ -62,6 +62,7 @@ export const VizLayout: VizLayoutComponentType = ({ width, height, legend, child
   switch (placement) {
     case 'bottom':
       containerStyle.flexDirection = 'column';
+      containerStyle.alignItems = 'center';
       legendStyle.maxHeight = maxHeight;
 
       if (legendMeasure.height) {
@@ -95,10 +96,10 @@ export const VizLayout: VizLayoutComponentType = ({ width, height, legend, child
 
   return (
     <div style={containerStyle}>
-      <div className={styles.viz}>{size && children(size.width, size.height)}</div>
       <div style={legendStyle} ref={legendRef}>
         <CustomScrollbar hideHorizontalTrack>{legend}</CustomScrollbar>
       </div>
+      <div className={styles.viz}>{size && children(size.width, size.height)}</div>
     </div>
   );
 };
