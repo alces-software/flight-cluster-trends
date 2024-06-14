@@ -3,7 +3,7 @@ import React from 'react';
 
 import { GrafanaTheme2, NavModelItem } from '@grafana/data';
 import { Components } from '@grafana/e2e-selectors';
-import { Icon, IconButton, ToolbarButton, useStyles2 } from '@grafana/ui';
+import { IconButton, ToolbarButton, useStyles2 } from '@grafana/ui';
 import { useGrafana } from 'app/core/context/GrafanaContext';
 import { t } from 'app/core/internationalization';
 import { HOME_NAV_ID } from 'app/core/reducers/navModel';
@@ -13,12 +13,9 @@ import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
 import { buildBreadcrumbs } from '../../Breadcrumbs/utils';
 import { TOP_BAR_LEVEL_HEIGHT } from '../types';
 
-import { NavToolbarSeparator } from './NavToolbarSeparator';
-
 export const TOGGLE_BUTTON_ID = 'mega-menu-toggle';
 
 export interface Props {
-  onToggleSearchBar(): void;
   onToggleMegaMenu(): void;
   onToggleKioskMode(): void;
   searchBarHidden?: boolean;
@@ -33,7 +30,6 @@ export function NavToolbar({
   sectionNav,
   pageNav,
   onToggleMegaMenu,
-  onToggleSearchBar,
   onToggleKioskMode,
 }: Props) {
   const { chrome } = useGrafana();
@@ -62,22 +58,12 @@ export function NavToolbar({
       <Breadcrumbs breadcrumbs={breadcrumbs} className={styles.breadcrumbsWrapper} />
       <div className={styles.actions}>
         {actions}
-        {searchBarHidden && (
-          <ToolbarButton
-            onClick={onToggleKioskMode}
-            narrow
-            title={t('navigation.toolbar.enable-kiosk', 'Enable kiosk mode')}
-            icon="monitor"
-          />
-        )}
-        {actions && <NavToolbarSeparator />}
         <ToolbarButton
-          onClick={onToggleSearchBar}
+          onClick={onToggleKioskMode}
           narrow
-          title={t('navigation.toolbar.toggle-search-bar', 'Toggle top search bar')}
-        >
-          <Icon name={searchBarHidden ? 'angle-down' : 'angle-up'} size="xl" />
-        </ToolbarButton>
+          title={t('navigation.toolbar.enable-kiosk', 'Enable kiosk mode')}
+          icon="monitor"
+        />
       </div>
     </div>
   );

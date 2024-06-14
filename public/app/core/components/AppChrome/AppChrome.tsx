@@ -93,7 +93,6 @@ export function AppChrome({ children }: Props) {
               sectionNav={state.sectionNav.node}
               pageNav={state.pageNav}
               actions={state.actions}
-              onToggleSearchBar={chrome.onToggleSearchBar}
               onToggleMegaMenu={handleMegaMenu}
               onToggleKioskMode={chrome.onToggleKioskMode}
             />
