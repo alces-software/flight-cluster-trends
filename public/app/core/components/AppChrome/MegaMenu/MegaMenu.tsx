@@ -5,10 +5,14 @@ import { useLocation } from 'react-router-dom';
 
 import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
-import { CustomScrollbar, Icon, IconButton, useStyles2, Stack } from '@grafana/ui';
+import { CustomScrollbar, Icon, IconButton, useStyles2, Stack, Dropdown, ToolbarButton } from '@grafana/ui';
 import { useGrafana } from 'app/core/context/GrafanaContext';
 import { t } from 'app/core/internationalization';
 import { useSelector } from 'app/types';
+
+import { contextSrv } from '../../../services/context_srv';
+import { SignInLink } from '../TopBar/SignInLink';
+import { TopNavBarMenu } from '../TopBar/TopNavBarMenu';
 
 import { MegaMenuItem } from './MegaMenuItem';
 import { enrichWithInteractionTracking, getActiveItem } from './utils';
@@ -21,6 +25,8 @@ export interface Props extends DOMAttributes {
 
 export const MegaMenu = React.memo(
   forwardRef<HTMLDivElement, Props>(({ onClose, ...restProps }, ref) => {
+    const navIndex = useSelector((state) => state.navIndex);
+    const profileNode = navIndex['profile'];
     const navTree = useSelector((state) => state.navBarTree);
     const styles = useStyles2(getStyles);
     const location = useLocation();
@@ -85,6 +91,17 @@ export const MegaMenu = React.memo(
                 </Stack>
               ))}
             </ul>
+            {!contextSrv.user.isSignedIn && <SignInLink />}
+            {profileNode && (
+              <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
+                <ToolbarButton
+                  className={styles.profileButton}
+                  imgSrc={contextSrv.user.gravatarUrl}
+                  imgAlt="User avatar"
+                  aria-label="Profile"
+                />
+              </Dropdown>
+            )}
           </CustomScrollbar>
         </nav>
       </div>
@@ -128,5 +145,9 @@ const getStyles = (theme: GrafanaTheme2) => ({
     [theme.breakpoints.up('xl')]: {
       display: 'inline-flex',
     },
+  }),
+  profileButton: css({
+    height: '24px',
+    marginTop: 'auto',
   }),
 });
