@@ -230,7 +230,6 @@ export const RowsList = (props: RowsListProps) => {
       const expandedRowStyle = tableState.expanded[row.id] ? css({ '&:hover': { background: 'inherit' } }) : {};
 
       if (rowHighlightIndex !== undefined && row.index === rowHighlightIndex) {
-        style = { ...style, backgroundColor: theme.components.table.rowHoverBackground };
         additionalProps = {
           'aria-selected': 'true',
         };
@@ -287,7 +286,6 @@ export const RowsList = (props: RowsListProps) => {
       rows,
       tableState.expanded,
       tableStyles,
-      theme.components.table.rowHoverBackground,
       timeRange,
       width,
       rowBg,

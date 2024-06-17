@@ -9,7 +9,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
   const cellPadding = 6;
   const cellHeight = getCellHeight(theme, cellHeightOption, cellPadding);
   const rowHeight = cellHeight + 2;
-  const headerHeight = 28;
+  const headerHeight = 56;
 
   const buildCellContainerStyle = (
     color?: string,
@@ -38,6 +38,8 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
         : {}),
 
       alignItems: 'center',
+      justifyContent: 'center !important',
+      textAlign: 'center !important',
       borderRight: `1px solid ${borderColor}`,
 
       color: rowStyled ? 'inherit' : color ?? undefined,
@@ -55,8 +57,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
         minHeight: `${rowHeight - 1}px`,
         wordBreak: textShouldWrap ? 'break-word' : undefined,
         whiteSpace: textShouldWrap && overflowOnHover ? 'normal' : 'nowrap',
-        boxShadow: overflowOnHover ? `0 0 2px ${theme.colors.primary.main}` : undefined,
-        background: rowStyled ? 'inherit' : background ?? theme.colors.background.primary,
+        cursor: 'default',
         zIndex: 1,
         '.cellActions': {
           color: '#FFF',
@@ -114,6 +115,8 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       overflow: 'auto',
       display: 'flex',
       flexDirection: 'column',
+      borderRadius: theme.shape.radius.default,
+      marginTop: theme.spacing(2),
     }),
     thead: css({
       label: 'thead',
@@ -124,23 +127,25 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
     }),
     tfoot: css({
       label: 'tfoot',
+      backgroundColor: theme.colors.background.tertiary,
       height: `${headerHeight}px`,
-      borderTop: `1px solid ${borderColor}`,
       overflowY: 'auto',
       overflowX: 'hidden',
       position: 'relative',
     }),
     headerRow: css({
       label: 'row',
-      borderBottom: `1px solid ${borderColor}`,
+      backgroundColor: theme.colors.background.tertiary,
+      height: 'fit-content',
     }),
     headerCell: css({
       height: '100%',
-      padding: `0 ${cellPadding}px`,
+      padding: theme.spacing(2),
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center !important',
       fontWeight: theme.typography.fontWeightMedium,
 
       '&:last-child': {
@@ -161,7 +166,6 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       marginRight: theme.spacing(0.5),
 
       '&:hover': {
-        textDecoration: 'underline',
         color: theme.colors.text.link,
       },
     }),
@@ -175,6 +179,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       textOverflow: 'ellipsis',
       userSelect: 'text',
       whiteSpace: 'nowrap',
+      textAlign: 'center',
     }),
     sortIcon: css({
       marginLeft: theme.spacing(0.5),
@@ -189,7 +194,6 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       fontWeight: theme.typography.fontWeightMedium,
       paddingRight: theme.spacing(1.5),
       '&:hover': {
-        textDecoration: 'underline',
         color: theme.colors.text.link,
       },
     }),
@@ -227,7 +231,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       color: theme.colors.text.secondary,
       fontSize: theme.typography.bodySmall.fontSize,
       display: 'flex',
-      justifyContent: 'flex-end',
+      justifyContent: 'center',
       padding: theme.spacing(0, 1, 0, 2),
     }),
 
@@ -243,12 +247,10 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
     },
     row: css({
       label: 'row',
-      borderBottom: `1px solid ${borderColor}`,
 
-      '&:hover': {
-        backgroundColor: theme.components.table.rowHoverBackground,
+      '&:nth-child(even)': {
+        backgroundColor: theme.colors.background.secondary,
       },
-
       '&:last-child': {
         borderBottom: 0,
       },

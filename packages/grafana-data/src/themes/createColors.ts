@@ -35,6 +35,8 @@ export interface ThemeColorsBase<TColor> {
     primary: string;
     /** Cards and elements that need to stand out on the primary background */
     secondary: string;
+    /** Table headers */
+    tertiary: string;
   };
 
   border: {
@@ -145,6 +147,7 @@ class DarkColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
     canvas: palette.gray05,
     primary: palette.gray10,
     secondary: palette.gray15,
+    tertiary: palette.gray25,
   };
 
   action = {
@@ -227,6 +230,7 @@ class LightColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
     canvas: palette.gray90,
     primary: palette.white,
     secondary: palette.gray100,
+    tertiary: palette.gray90,
   };
 
   action = {
