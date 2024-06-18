@@ -4,14 +4,14 @@ import React from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { useStyles2 } from '@grafana/ui';
 
-import { BouncingLoader } from '../components/BouncingLoader/BouncingLoader';
+import { AnimatedLoader } from '../components/BouncingLoader/AnimatedLoader';
 
 export function GrafanaRouteLoading() {
   const styles = useStyles2(getStyles);
 
   return (
     <div className={styles.loadingPage}>
-      <BouncingLoader />
+      <AnimatedLoader />
     </div>
   );
 }
