@@ -70,6 +70,20 @@ export const MegaMenu = React.memo(
             <p>
               cluster<strong>trends</strong>
             </p>
+            {profileNode && (
+              <>
+                <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
+                  <ToolbarButton
+                    className={styles.profileButton}
+                    imgSrc={contextSrv.user.gravatarUrl}
+                    imgAlt="User avatar"
+                    aria-label="Profile"
+                  >
+                    {contextSrv.user.name}
+                  </ToolbarButton>
+                </Dropdown>
+              </>
+            )}
           </div>
           <nav className={styles.content}>
             <CustomScrollbar showScrollIndicators hideHorizontalTrack>
@@ -98,20 +112,6 @@ export const MegaMenu = React.memo(
                   </Stack>
                 ))}
               </ul>
-              {profileNode && (
-                <>
-                  <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
-                    <ToolbarButton
-                      className={styles.profileButton}
-                      imgSrc={contextSrv.user.gravatarUrl}
-                      imgAlt="User avatar"
-                      aria-label="Profile"
-                    >
-                      Welcome, user
-                    </ToolbarButton>
-                  </Dropdown>
-                </>
-              )}
             </CustomScrollbar>
           </nav>
         </div>
@@ -166,7 +166,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
   itemList: css({
     boxSizing: 'border-box',
     borderTop: `solid 1px ${theme.colors.background.tertiary}`,
-    borderBottom: `solid 1px ${theme.colors.background.tertiary}`,
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4),
     display: 'flex',
@@ -184,10 +183,14 @@ const getStyles = (theme: GrafanaTheme2) => ({
     },
   }),
   profileButton: css({
-    height: '24px',
-    marginTop: theme.spacing(4),
-    marginLeft: theme.spacing(1),
-    fontSize: '1.2rem',
+    height: '2rem',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
+    fontSize: '1rem',
     color: theme.colors.text.primary,
+
+    '& img': {
+      borderRadius: '50%',
+    },
   }),
 });
