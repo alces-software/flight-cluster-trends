@@ -11,7 +11,7 @@ import { t } from 'app/core/internationalization';
 import { useSelector } from 'app/types';
 
 import { contextSrv } from '../../../services/context_srv';
-import { SignInLink } from '../TopBar/SignInLink';
+import { LoginLogo } from '../../Branding/Branding';
 import { TopNavBarMenu } from '../TopBar/TopNavBarMenu';
 
 import { MegaMenuItem } from './MegaMenuItem';
@@ -54,56 +54,67 @@ export const MegaMenu = React.memo(
 
     return (
       <div data-testid={selectors.components.NavMenu.Menu} ref={ref} {...restProps}>
-        <div className={styles.mobileHeader}>
-          <Icon name="bars" size="xl" />
-          <IconButton
-            tooltip={t('navigation.megamenu.close', 'Close menu')}
-            name="times"
-            onClick={onClose}
-            size="xl"
-            variant="secondary"
-          />
-        </div>
-        <nav className={styles.content}>
-          <CustomScrollbar showScrollIndicators hideHorizontalTrack>
-            <ul className={styles.itemList} aria-label={t('navigation.megamenu.list-label', 'Navigation')}>
-              {navItems.map((link, index) => (
-                <Stack key={link.text} direction={index === 0 ? 'row-reverse' : 'row'} alignItems="center">
-                  {index === 0 && (
-                    <IconButton
-                      id="dock-menu-button"
-                      className={styles.dockMenuButton}
-                      tooltip={
-                        state.megaMenuDocked
-                          ? t('navigation.megamenu.undock', 'Undock menu')
-                          : t('navigation.megamenu.dock', 'Dock menu')
-                      }
-                      name="web-section-alt"
-                      onClick={handleDockedMenu}
-                      variant="secondary"
+        <div className={styles.flexColumn}>
+          <div className={styles.mobileHeader}>
+            <Icon name="bars" size="xl" />
+            <IconButton
+              tooltip={t('navigation.megamenu.close', 'Close menu')}
+              name="times"
+              onClick={onClose}
+              size="xl"
+              variant="secondary"
+            />
+          </div>
+          <div className={styles.logoWrapper}>
+            <LoginLogo className={styles.logo} />
+            <p>
+              cluster<strong>trends</strong>
+            </p>
+          </div>
+          <nav className={styles.content}>
+            <CustomScrollbar showScrollIndicators hideHorizontalTrack>
+              <ul className={styles.itemList} aria-label={t('navigation.megamenu.list-label', 'Navigation')}>
+                {navItems.map((link, index) => (
+                  <Stack key={link.text} direction={index === 0 ? 'row-reverse' : 'row'} alignItems="center">
+                    {index === 0 && (
+                      <IconButton
+                        id="dock-menu-button"
+                        className={styles.dockMenuButton}
+                        tooltip={
+                          state.megaMenuDocked
+                            ? t('navigation.megamenu.undock', 'Undock menu')
+                            : t('navigation.megamenu.dock', 'Dock menu')
+                        }
+                        name="web-section-alt"
+                        onClick={handleDockedMenu}
+                        variant="secondary"
+                      />
+                    )}
+                    <MegaMenuItem
+                      link={link}
+                      onClick={state.megaMenuDocked ? undefined : onClose}
+                      activeItem={activeItem}
                     />
-                  )}
-                  <MegaMenuItem
-                    link={link}
-                    onClick={state.megaMenuDocked ? undefined : onClose}
-                    activeItem={activeItem}
-                  />
-                </Stack>
-              ))}
-            </ul>
-            {!contextSrv.user.isSignedIn && <SignInLink />}
-            {profileNode && (
-              <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
-                <ToolbarButton
-                  className={styles.profileButton}
-                  imgSrc={contextSrv.user.gravatarUrl}
-                  imgAlt="User avatar"
-                  aria-label="Profile"
-                />
-              </Dropdown>
-            )}
-          </CustomScrollbar>
-        </nav>
+                  </Stack>
+                ))}
+              </ul>
+              {profileNode && (
+                <>
+                  <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
+                    <ToolbarButton
+                      className={styles.profileButton}
+                      imgSrc={contextSrv.user.gravatarUrl}
+                      imgAlt="User avatar"
+                      aria-label="Profile"
+                    >
+                      Welcome, user
+                    </ToolbarButton>
+                  </Dropdown>
+                </>
+              )}
+            </CustomScrollbar>
+          </nav>
+        </div>
       </div>
     );
   })
@@ -115,9 +126,14 @@ const getStyles = (theme: GrafanaTheme2) => ({
   content: css({
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
+    flexGrow: '1',
     minHeight: 0,
     position: 'relative',
+  }),
+  flexColumn: css({
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
   }),
   mobileHeader: css({
     display: 'flex',
@@ -129,15 +145,36 @@ const getStyles = (theme: GrafanaTheme2) => ({
       display: 'none',
     },
   }),
+  logoWrapper: css({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    fontSize: '22px',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+
+    '& p': {
+      fontWeight: '100',
+    },
+    '& strong': {
+      fontWeight: '900',
+    },
+  }),
+  logo: css({
+    width: '100px',
+  }),
   itemList: css({
     boxSizing: 'border-box',
+    borderTop: `solid 1px ${theme.colors.background.tertiary}`,
+    borderBottom: `solid 1px ${theme.colors.background.tertiary}`,
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     listStyleType: 'none',
     [theme.breakpoints.up('md')]: {
       width: MENU_WIDTH,
     },
-    paddingTop: theme.spacing(4),
   }),
   dockMenuButton: css({
     display: 'none',
@@ -148,6 +185,9 @@ const getStyles = (theme: GrafanaTheme2) => ({
   }),
   profileButton: css({
     height: '24px',
-    marginTop: 'auto',
+    marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(1),
+    fontSize: '1.2rem',
+    color: theme.colors.text.primary,
   }),
 });
