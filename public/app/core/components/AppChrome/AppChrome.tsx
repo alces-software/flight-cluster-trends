@@ -10,7 +10,6 @@ import { useGrafana } from 'app/core/context/GrafanaContext';
 import { useMediaQueryChange } from 'app/core/hooks/useMediaQueryChange';
 import store from 'app/core/store';
 import { CommandPalette } from 'app/features/commandPalette/CommandPalette';
-import { KioskMode } from 'app/types';
 
 import { AppChromeMenu } from './AppChromeMenu';
 import { DOCKED_LOCAL_STORAGE_KEY, DOCKED_MENU_OPEN_LOCAL_STORAGE_KEY } from './AppChromeService';
@@ -24,7 +23,6 @@ export interface Props extends PropsWithChildren<{}> {}
 export function AppChrome({ children }: Props) {
   const { chrome } = useGrafana();
   const state = chrome.useState();
-  const searchBarHidden = state.searchBarHidden || state.kioskMode === KioskMode.TV;
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
@@ -44,7 +42,6 @@ export function AppChrome({ children }: Props) {
 
   const contentClass = cx({
     [styles.content]: true,
-    [styles.contentNoSearchBar]: searchBarHidden,
     [styles.contentChromeless]: state.chromeless,
   });
 
@@ -78,7 +75,6 @@ export function AppChrome({ children }: Props) {
   return (
     <div
       className={classNames('main-view', {
-        'main-view--search-bar-hidden': searchBarHidden && !state.chromeless,
         'main-view--chrome-hidden': state.chromeless,
       })}
     >
@@ -89,7 +85,6 @@ export function AppChrome({ children }: Props) {
           </LinkButton>
           <header className={cx(styles.topNav)}>
             <NavToolbar
-              searchBarHidden={searchBarHidden}
               sectionNav={state.sectionNav.node}
               pageNav={state.pageNav}
               actions={state.actions}
@@ -123,12 +118,9 @@ const getStyles = (theme: GrafanaTheme2) => {
     content: css({
       display: 'flex',
       flexDirection: 'column',
-      paddingTop: TOP_BAR_LEVEL_HEIGHT * 2,
+      paddingTop: TOP_BAR_LEVEL_HEIGHT,
       flexGrow: 1,
       height: '100%',
-    }),
-    contentNoSearchBar: css({
-      paddingTop: TOP_BAR_LEVEL_HEIGHT,
     }),
     contentChromeless: css({
       paddingTop: 0,

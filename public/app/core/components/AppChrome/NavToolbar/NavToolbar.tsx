@@ -18,20 +18,12 @@ export const TOGGLE_BUTTON_ID = 'mega-menu-toggle';
 export interface Props {
   onToggleMegaMenu(): void;
   onToggleKioskMode(): void;
-  searchBarHidden?: boolean;
   sectionNav: NavModelItem;
   pageNav?: NavModelItem;
   actions: React.ReactNode;
 }
 
-export function NavToolbar({
-  actions,
-  searchBarHidden,
-  sectionNav,
-  pageNav,
-  onToggleMegaMenu,
-  onToggleKioskMode,
-}: Props) {
+export function NavToolbar({ actions, sectionNav, pageNav, onToggleMegaMenu, onToggleKioskMode }: Props) {
   const { chrome } = useGrafana();
   const state = chrome.useState();
   const homeNav = useSelector((state) => state.navIndex)[HOME_NAV_ID];
