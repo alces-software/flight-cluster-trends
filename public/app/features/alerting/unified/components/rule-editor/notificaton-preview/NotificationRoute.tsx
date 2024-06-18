@@ -192,9 +192,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
     gap: ${theme.spacing(1)};
     align-items: center;
     border-bottom: 1px solid ${theme.colors.border.weak};
-    &:hover {
-      background-color: ${theme.components.table.rowHoverBackground};
-    }
     padding: ${theme.spacing(0.5, 0.5, 0.5, 0)};
   `,
   labelList: css`

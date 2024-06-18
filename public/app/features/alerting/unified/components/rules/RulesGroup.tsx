@@ -333,10 +333,6 @@ export const getStyles = (theme: GrafanaTheme2) => {
       padding: ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)} 0;
       flex-wrap: nowrap;
       border-bottom: 1px solid ${theme.colors.border.weak};
-
-      &:hover {
-        background-color: ${theme.components.table.rowHoverBackground};
-      }
     `,
     headerStats: css`
       flex-shrink: 0;

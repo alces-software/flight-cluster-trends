@@ -72,7 +72,6 @@ export const RowsList = (props: RowsListProps) => {
 
   const [rowHighlightIndex, setRowHighlightIndex] = useState<number | undefined>(initialRowIndex);
 
-  const theme = useTheme2();
   const panelContext = usePanelContext();
 
   const threshold = useMemo(() => {
