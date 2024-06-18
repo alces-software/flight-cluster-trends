@@ -13,7 +13,7 @@ import { CommandPalette } from 'app/features/commandPalette/CommandPalette';
 
 import { AppChromeMenu } from './AppChromeMenu';
 import { DOCKED_LOCAL_STORAGE_KEY, DOCKED_MENU_OPEN_LOCAL_STORAGE_KEY } from './AppChromeService';
-import { MegaMenu } from './MegaMenu/MegaMenu';
+import { MegaMenu, MENU_WIDTH } from './MegaMenu/MegaMenu';
 import { NavToolbar } from './NavToolbar/NavToolbar';
 import { ReturnToPrevious } from './ReturnToPrevious/ReturnToPrevious';
 import { TOP_BAR_LEVEL_HEIGHT } from './types';
@@ -129,6 +129,9 @@ const getStyles = (theme: GrafanaTheme2) => {
       background: theme.colors.background.primary,
       display: 'none',
       zIndex: theme.zIndex.navbarFixed,
+      position: 'relative',
+      top: `-${TOP_BAR_LEVEL_HEIGHT}px`,
+      height: '100%',
 
       [theme.breakpoints.up('xl')]: {
         display: 'block',
@@ -138,10 +141,13 @@ const getStyles = (theme: GrafanaTheme2) => {
       display: 'flex',
       position: 'fixed',
       zIndex: theme.zIndex.navbarFixed,
-      left: 0,
+      left: MENU_WIDTH,
       right: 0,
+      marginInline: theme.spacing(2),
       background: theme.colors.background.primary,
       flexDirection: 'column',
+      borderBottomLeftRadius: theme.shape.radius.default,
+      borderBottomRightRadius: theme.shape.radius.default,
     }),
     panes: css({
       label: 'page-panes',

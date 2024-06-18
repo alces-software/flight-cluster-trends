@@ -166,7 +166,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   itemList: css({
     boxSizing: 'border-box',
     borderTop: `solid 1px ${theme.colors.background.tertiary}`,
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
