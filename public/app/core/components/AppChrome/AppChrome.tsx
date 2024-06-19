@@ -54,6 +54,8 @@ export function AppChrome({ children }: Props) {
   const shouldShowReturnToPrevious =
     config.featureToggles.returnToPrevious && state.returnToPrevious && url !== state.returnToPrevious.href;
 
+  const megaMenuDockedAndOpen = !state.chromeless && state.megaMenuDocked && state.megaMenuOpen;
+
   // Clear returnToPrevious when the page is manually navigated to
   useEffect(() => {
     if (state.returnToPrevious && url === state.returnToPrevious.href) {
@@ -78,30 +80,32 @@ export function AppChrome({ children }: Props) {
         'main-view--chrome-hidden': state.chromeless,
       })}
     >
-      {!state.chromeless && (
-        <>
-          <LinkButton className={styles.skipLink} href="#pageContent">
-            Skip to main content
-          </LinkButton>
-          <header className={cx(styles.topNav)}>
-            <NavToolbar
-              sectionNav={state.sectionNav.node}
-              pageNav={state.pageNav}
-              actions={state.actions}
-              onToggleMegaMenu={handleMegaMenu}
-              onToggleKioskMode={chrome.onToggleKioskMode}
-            />
-          </header>
-        </>
-      )}
-      <div className={contentClass}>
-        <div className={styles.panes}>
-          {!state.chromeless && state.megaMenuDocked && state.megaMenuOpen && (
-            <MegaMenu className={styles.dockedMegaMenu} onClose={() => chrome.setMegaMenuOpen(false)} />
+      <div className={styles.pageGrid}>
+        {megaMenuDockedAndOpen && (
+          <MegaMenu className={styles.dockedMegaMenu} onClose={() => chrome.setMegaMenuOpen(false)} />
+        )}
+        <div className={contentClass}>
+          {!state.chromeless && (
+            <>
+              <LinkButton className={styles.skipLink} href="#pageContent">
+                Skip to main content
+              </LinkButton>
+              <header className={cx(styles.topNav)}>
+                <NavToolbar
+                  sectionNav={state.sectionNav.node}
+                  pageNav={state.pageNav}
+                  actions={state.actions}
+                  onToggleMegaMenu={handleMegaMenu}
+                  onToggleKioskMode={chrome.onToggleKioskMode}
+                />
+              </header>
+            </>
           )}
-          <main className={styles.pageContainer} id="pageContent">
-            {children}
-          </main>
+          <div className={styles.panes}>
+            <main className={styles.pageContainer} id="pageContent">
+              {children}
+            </main>
+          </div>
         </div>
       </div>
       {!state.chromeless && !state.megaMenuDocked && <AppChromeMenu />}
@@ -115,12 +119,18 @@ export function AppChrome({ children }: Props) {
 
 const getStyles = (theme: GrafanaTheme2) => {
   return {
+    pageGrid: css({
+      display: 'flex',
+      position: 'relative',
+      width: '100vw',
+    }),
     content: css({
       display: 'flex',
       flexDirection: 'column',
-      paddingTop: TOP_BAR_LEVEL_HEIGHT,
       flexGrow: 1,
       height: '100%',
+      width: `calc(100% - ${MENU_WIDTH})`,
+      position: 'relative',
     }),
     contentChromeless: css({
       paddingTop: 0,
@@ -129,9 +139,10 @@ const getStyles = (theme: GrafanaTheme2) => {
       background: theme.colors.background.primary,
       display: 'none',
       zIndex: theme.zIndex.navbarFixed,
-      position: 'relative',
-      top: `-${TOP_BAR_LEVEL_HEIGHT}px`,
-      height: '100%',
+      position: 'sticky',
+      top: 0,
+      height: '100vh',
+      width: MENU_WIDTH,
 
       [theme.breakpoints.up('xl')]: {
         display: 'block',
@@ -148,12 +159,13 @@ const getStyles = (theme: GrafanaTheme2) => {
       flexDirection: 'column',
       borderBottomLeftRadius: theme.shape.radius.default,
       borderBottomRightRadius: theme.shape.radius.default,
+      boxShadow: theme.shadows.z4,
     }),
     panes: css({
+      paddingTop: TOP_BAR_LEVEL_HEIGHT,
       label: 'page-panes',
       display: 'flex',
       height: '100%',
-      width: '100%',
       flexGrow: 1,
       minHeight: 0,
       flexDirection: 'column',
