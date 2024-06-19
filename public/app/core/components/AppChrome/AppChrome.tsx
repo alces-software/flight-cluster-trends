@@ -16,7 +16,6 @@ import { DOCKED_LOCAL_STORAGE_KEY, DOCKED_MENU_OPEN_LOCAL_STORAGE_KEY } from './
 import { MegaMenu, MENU_WIDTH } from './MegaMenu/MegaMenu';
 import { NavToolbar } from './NavToolbar/NavToolbar';
 import { ReturnToPrevious } from './ReturnToPrevious/ReturnToPrevious';
-import { TOP_BAR_LEVEL_HEIGHT } from './types';
 
 export interface Props extends PropsWithChildren<{}> {}
 
@@ -150,8 +149,9 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
     topNav: css({
       display: 'flex',
-      position: 'fixed',
+      position: 'sticky',
       zIndex: theme.zIndex.navbarFixed,
+      top: 0,
       left: MENU_WIDTH,
       right: 0,
       marginInline: theme.spacing(2),
@@ -162,7 +162,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       boxShadow: theme.shadows.z4,
     }),
     panes: css({
-      paddingTop: TOP_BAR_LEVEL_HEIGHT,
+      paddingTop: 0,
       label: 'page-panes',
       display: 'flex',
       height: '100%',
