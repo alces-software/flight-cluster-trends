@@ -154,10 +154,11 @@ const getStyles = (theme: GrafanaTheme2) => ({
     marginBottom: theme.spacing(1),
 
     '& p': {
-      fontWeight: '100',
+      fontWeight: '200',
+      color: 'white',
     },
     '& strong': {
-      fontWeight: '900',
+      fontWeight: '700',
     },
   }),
   logo: css({

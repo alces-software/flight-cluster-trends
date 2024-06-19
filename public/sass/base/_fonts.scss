@@ -57,3 +57,19 @@ it may take less space than multiple static weights.
   font-display: swap;
   src: url('#{$font-file-path}/lexend/Lexend-Medium.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('#{$font-file-path}/lexend/Lexend-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('#{$font-file-path}/lexend/Lexend-Bold.woff2') format('woff2');
+}
