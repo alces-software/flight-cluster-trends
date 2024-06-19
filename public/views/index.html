@@ -52,13 +52,6 @@
         animation-fill-mode: forwards;
       }
 
-      .preloader__bounce {
-        text-align: center;
-        animation-name: preloader-bounce;
-        animation-duration: 0.9s;
-        animation-iteration-count: infinite;
-      }
-
       .preloader__logo {
         display: inline-block;
         animation-duration: 0.9s;
@@ -122,18 +115,6 @@
         }
         100% {
           opacity: 1;
-        }
-      }
-
-      @keyframes preloader-bounce {
-        from,
-        to {
-          transform: translateY(0px);
-          animation-timing-function: cubic-bezier(0.3, 0, 0.1, 1);
-        }
-        50% {
-          transform: translateY(-50px);
-          animation-timing-function: cubic-bezier(0.9, 0, 0.7, 1);
         }
       }
 
