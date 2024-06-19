@@ -10,7 +10,9 @@ import { buildBreadcrumbs } from '../Breadcrumbs/utils';
 export function usePageTitle(navModel?: NavModel, pageNav?: NavModelItem) {
   const homeNav = useSelector((state) => state.navIndex)?.[HOME_NAV_ID];
   useEffect(() => {
-    const sectionNav = (navModel?.node !== navModel?.main ? navModel?.node : navModel?.main) ?? { text: 'Grafana' };
+    const sectionNav = (navModel?.node !== navModel?.main ? navModel?.node : navModel?.main) ?? {
+      text: 'Cluster Trends',
+    };
     const parts: string[] = buildBreadcrumbs(sectionNav, pageNav, homeNav)
       .map((crumb) => crumb.text)
       .reverse();
