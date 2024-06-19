@@ -87,7 +87,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   }),
 
   circle: css({
-    stroke: `${theme.colors.background.tertiary}`,
+    stroke: `${theme.colors.background.secondary}`,
     strokeWidth: '1px',
   }),
 

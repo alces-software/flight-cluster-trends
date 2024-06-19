@@ -43,9 +43,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-
-      .preloader__enter {
+        position: relative;
         opacity: 0;
         animation-name: preloader-fade-in;
         animation-iteration-count: 1;
@@ -63,14 +61,14 @@
 
       .preloader__logo {
         display: inline-block;
-        animation-name: preloader-squash;
         animation-duration: 0.9s;
         animation-iteration-count: infinite;
-        width: 60px;
-        height: 60px;
+        height: 120px;
         background-repeat: no-repeat;
         background-size: contain;
         background-image: url('[[.LoadingLogo]]');
+        position: relative;
+        top: -180px;
       }
 
       .preloader__text {
@@ -85,6 +83,30 @@
         animation-fill-mode: forwards;
       }
 
+      .preloader__spinner {
+        animation-name: preloader-spinner;
+        animation-duration: 2.7s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        width: 240px;
+        height: 240px;
+      }
+
+      .preloader__circle {
+        stroke: #171B2E;
+        stroke-width: 1px;
+      }
+
+      .preloader__path {
+        stroke: #F21398;
+        stroke-width: 1px;
+        stroke-linecap: round;
+        animation-name: preloader-dash;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+      }
+
       .theme-light .preloader__text {
         color: #52545c;
       }
@@ -96,7 +118,6 @@
       @keyframes preloader-fade-in {
         0% {
           opacity: 0;
-          /*animation-timing-function: linear;*/
           animation-timing-function: cubic-bezier(0, 0, 0.5, 1);
         }
         100% {
@@ -139,13 +160,38 @@
         }
       }
 
+      @keyframes preloader-spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes preloader-dash {
+        0% {
+          stroke-dasharray: 1, 150;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -35;
+        }
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -124;
+        }
+      }
+
       /* Fail info */
       .preloader__text--fail {
         display: none;
       }
 
       /* stop logo animation */
-      .preloader--done .preloader__bounce,
+      .preloader--done .preloader__spinner,
+      .preloader--done .preloader__path,
       .preloader--done .preloader__logo {
         animation-name: none;
         display: none;
@@ -169,15 +215,20 @@
       }
     </style>
 
-    <div class="preloader">
-      <div class="preloader__enter">
-        <div class="preloader__bounce">
-          <div class="preloader__logo" aria-live="polite" role="status" aria-label="Loading Grafana"></div>
-        </div>
-      </div>
+    <div class="preloader"
+         role="status"
+         aria-live="polite"
+         aria-label="Loading"
+    >
+      <svg class="preloader__spinner" viewBox="0 0 50 50">
+        <circle class="preloader__circle" cx="25" cy="25" r="20" fill="none"></circle>
+        <circle class="preloader__path" cx="25" cy="25" r="20" fill="none"></circle>
+      </svg>
+      <img alt="" src="public/img/moosebird.svg" class="preloader__logo" />
+
       <div class="preloader__text preloader__text--fail">
         <p>
-          <strong>If you're seeing this Grafana has failed to load its application files</strong>
+          <strong>If you're seeing this, Grafana has failed to load its application files</strong>
           <br />
           <br />
         </p>
