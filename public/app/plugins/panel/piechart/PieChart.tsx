@@ -349,14 +349,14 @@ function getLabelPos(arc: PieArcDatum<FieldDisplay>, outerRadius: number, innerR
 
 function getGradientColorFrom(color: string, theme: GrafanaTheme2) {
   return tinycolor(color)
-    .darken(20 * (theme.isDark ? 1 : -0.7))
+    .lighten(1 * (theme.isDark ? 1 : -0.7))
     .spin(4)
     .toRgbString();
 }
 
 function getGradientColorTo(color: string, theme: GrafanaTheme2) {
   return tinycolor(color)
-    .darken(10 * (theme.isDark ? 1 : -0.7))
+    .lighten(5 * (theme.isDark ? 1 : -0.7))
     .spin(-4)
     .toRgbString();
 }
