@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import React, { memo, useEffect, useMemo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { GrafanaTheme2 } from '@grafana/data';
+import { GrafanaTheme2, PageLayoutType } from '@grafana/data';
 import { reportInteraction } from '@grafana/runtime';
 import { FilterInput, useStyles2 } from '@grafana/ui';
 import { Page } from 'app/core/components/Page/Page';
@@ -108,6 +108,7 @@ const BrowseDashboardsPage = memo(({ match }: Props) => {
       navId="dashboards/browse"
       pageNav={navModel}
       onEditTitle={showEditTitle ? onEditTitle : undefined}
+      layout={PageLayoutType.Custom}
       actions={
         <>
           {folderDTO && <FolderActionsButton folder={folderDTO} />}
@@ -128,7 +129,6 @@ const BrowseDashboardsPage = memo(({ match }: Props) => {
           escapeRegex={false}
           onChange={(e) => stateManager.onQueryChange(e)}
         />
-
         {hasSelection ? <BrowseActions /> : <BrowseFilters />}
 
         <div className={styles.subView}>
@@ -153,6 +153,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
     gridTemplateRows: 'auto auto 1fr',
     height: '100%',
     rowGap: theme.spacing(1),
+    padding: theme.spacing(2),
   }),
 
   // AutoSizer needs an element to measure the full height available

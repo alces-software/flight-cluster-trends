@@ -262,6 +262,8 @@ const getStyles = (theme: GrafanaTheme2) => {
     headerRow: css({
       backgroundColor: theme.colors.background.secondary,
       height: HEADER_HEIGHT,
+      borderTopLeftRadius: theme.shape.radius.default,
+      borderTopRightRadius: theme.shape.radius.default,
     }),
 
     bodyRow: css({
