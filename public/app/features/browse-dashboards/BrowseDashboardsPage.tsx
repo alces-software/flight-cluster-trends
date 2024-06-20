@@ -108,7 +108,7 @@ const BrowseDashboardsPage = memo(({ match }: Props) => {
       navId="dashboards/browse"
       pageNav={navModel}
       onEditTitle={showEditTitle ? onEditTitle : undefined}
-      layout={PageLayoutType.Custom}
+      layout={PageLayoutType.Standard}
       actions={
         <>
           {folderDTO && <FolderActionsButton folder={folderDTO} />}
@@ -153,7 +153,6 @@ const getStyles = (theme: GrafanaTheme2) => ({
     gridTemplateRows: 'auto auto 1fr',
     height: '100%',
     rowGap: theme.spacing(1),
-    padding: theme.spacing(2),
   }),
 
   // AutoSizer needs an element to measure the full height available
