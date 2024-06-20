@@ -72,7 +72,7 @@ export const MegaMenu = React.memo(
             </p>
             {profileNode && (
               <>
-                <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">
+                <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom">
                   <ToolbarButton
                     className={styles.profileButton}
                     imgSrc={contextSrv.user.gravatarUrl}
