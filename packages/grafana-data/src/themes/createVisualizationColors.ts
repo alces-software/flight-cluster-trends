@@ -97,11 +97,11 @@ function getDarkHues(): ThemeVizHue[] {
     {
       name: 'red',
       shades: [
-        { color: '#FFA6B0', name: 'super-light-red' },
-        { color: '#FF7383', name: 'light-red' },
-        { color: '#F2495C', name: 'red', primary: true },
-        { color: '#E02F44', name: 'semi-dark-red' },
-        { color: '#C4162A', name: 'dark-red' },
+        { color: '#FF95AE', name: 'super-light-red' },
+        { color: '#FD507A', name: 'light-red' },
+        { color: '#FE2559', name: 'red', primary: true },
+        { color: '#C90A38', name: 'semi-dark-red' },
+        { color: '#A3052B', name: 'dark-red' },
       ],
     },
     {
@@ -127,21 +127,31 @@ function getDarkHues(): ThemeVizHue[] {
     {
       name: 'green',
       shades: [
-        { color: '#C8F2C2', name: 'super-light-green', aliases: [] },
-        { color: '#96D98D', name: 'light-green', aliases: [] },
-        { color: '#73BF69', name: 'green', aliases: [], primary: true },
-        { color: '#56A64B', name: 'semi-dark-green', aliases: [] },
-        { color: '#37872D', name: 'dark-green', aliases: [] },
+        { color: '#8FFFC9', name: 'super-light-green', aliases: [] },
+        { color: '#49F0A0', name: 'light-green', aliases: [] },
+        { color: '#11D677', name: 'green', aliases: [], primary: true },
+        { color: '#06A75A', name: 'semi-dark-green', aliases: [] },
+        { color: '#037E43', name: 'dark-green', aliases: [] },
+      ],
+    },
+    {
+      name: 'cyan',
+      shades: [
+        { color: '#A2FBFA', name: 'super-light-cyan', aliases: [] },
+        { color: '#5FF4F3', name: 'light-cyan', aliases: [] },
+        { color: '#11D6D4', name: 'cyan', aliases: [], primary: true },
+        { color: '#07A5A3', name: 'semi-dark-cyan', aliases: [] },
+        { color: '#057C7B', name: 'dark-cyan', aliases: [] },
       ],
     },
     {
       name: 'blue',
       shades: [
-        { color: '#C0D8FF', name: 'super-light-blue', aliases: [] },
-        { color: '#8AB8FF', name: 'light-blue', aliases: [] },
-        { color: '#5794F2', name: 'blue', aliases: [], primary: true },
-        { color: '#3274D9', name: 'semi-dark-blue', aliases: [] },
-        { color: '#1F60C4', name: 'dark-blue', aliases: [] },
+        { color: '#8AB8FF', name: 'super-light-blue', aliases: [] },
+        { color: '#5DB6ED', name: 'light-blue', aliases: [] },
+        { color: '#2794D8', name: 'blue', aliases: [], primary: true },
+        { color: '#006DB0', name: 'semi-dark-blue', aliases: [] },
+        { color: '#00578D', name: 'dark-blue', aliases: [] },
       ],
     },
     {
@@ -152,6 +162,16 @@ function getDarkHues(): ThemeVizHue[] {
         { color: '#B877D9', name: 'purple', aliases: [], primary: true },
         { color: '#A352CC', name: 'semi-dark-purple', aliases: [] },
         { color: '#8F3BB8', name: 'dark-purple', aliases: [] },
+      ],
+    },
+    {
+      name: 'pink',
+      shades: [
+        { color: '#FFA1DA', name: 'super-light-pink', aliases: [] },
+        { color: '#FF6AC4', name: 'light-pink', aliases: [] },
+        { color: '#FB37AD', name: 'pink', aliases: [], primary: true },
+        { color: '#CE1D88', name: 'semi-dark-pink', aliases: [] },
+        { color: '#A50F69', name: 'dark-pink', aliases: [] },
       ],
     },
   ];
@@ -192,21 +212,31 @@ function getLightHues(): ThemeVizHue[] {
     {
       name: 'green',
       shades: [
-        { color: '#96D98D', name: 'super-light-green', aliases: [] },
-        { color: '#73BF69', name: 'light-green', aliases: [] },
-        { color: '#56A64B', name: 'green', aliases: [], primary: true },
-        { color: '#37872D', name: 'semi-dark-green', aliases: [] },
-        { color: '#19730E', name: 'dark-green', aliases: [] },
+        { color: '#8FFFC9', name: 'super-light-green', aliases: [] },
+        { color: '#49F0A0', name: 'light-green', aliases: [] },
+        { color: '#11D677', name: 'green', aliases: [], primary: true },
+        { color: '#06A75A', name: 'semi-dark-green', aliases: [] },
+        { color: '#037E43', name: 'dark-green', aliases: [] },
+      ],
+    },
+    {
+      name: 'cyan',
+      shades: [
+        { color: '#A2FBFA', name: 'super-light-cyan', aliases: [] },
+        { color: '#5FF4F3', name: 'light-cyan', aliases: [] },
+        { color: '#11D6D4', name: 'cyan', aliases: [], primary: true },
+        { color: '#07A5A3', name: 'semi-dark-cyan', aliases: [] },
+        { color: '#057C7B', name: 'dark-cyan', aliases: [] },
       ],
     },
     {
       name: 'blue',
       shades: [
         { color: '#8AB8FF', name: 'super-light-blue', aliases: [] },
-        { color: '#5794F2', name: 'light-blue', aliases: [] },
-        { color: '#3274D9', name: 'blue', aliases: [], primary: true },
-        { color: '#1F60C4', name: 'semi-dark-blue', aliases: [] },
-        { color: '#1250B0', name: 'dark-blue', aliases: [] },
+        { color: '#5DB6ED', name: 'light-blue', aliases: [] },
+        { color: '#2794D8', name: 'blue', aliases: [], primary: true },
+        { color: '#006DB0', name: 'semi-dark-blue', aliases: [] },
+        { color: '#00578D', name: 'dark-blue', aliases: [] },
       ],
     },
     {
@@ -219,6 +249,16 @@ function getLightHues(): ThemeVizHue[] {
         { color: '#7C2EA3', name: 'dark-purple', aliases: [] },
       ],
     },
+    {
+      name: 'pink',
+      shades: [
+        { color: '#FFA1DA', name: 'super-light-pink', aliases: [] },
+        { color: '#FF6AC4', name: 'light-pink', aliases: [] },
+        { color: '#FB37AD', name: 'pink', aliases: [], primary: true },
+        { color: '#CE1D88', name: 'semi-dark-pink', aliases: [] },
+        { color: '#A50F69', name: 'dark-pink', aliases: [] },
+      ],
+    },
   ];
 }
 
@@ -226,6 +266,12 @@ function getClassicPalette() {
   // Todo replace these with named colors (as many as possible)
 
   return [
+    '#2794D8',
+    '#FB37AD',
+    '#11D6D4',
+    '#11D677',
+    '#627796',
+    '#7773EF',
     'green', // '#7EB26D', // 0: pale green
     'semi-dark-yellow', // '#EAB839', // 1: mustard
     'light-blue', // #6ED0E0', // 2: light blue
