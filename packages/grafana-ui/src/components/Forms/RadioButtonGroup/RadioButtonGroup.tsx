@@ -119,6 +119,10 @@ const getStyles = (theme: GrafanaTheme2) => {
       border: `1px solid ${theme.components.input.borderColor}`,
       borderRadius: theme.shape.radius.default,
       padding: '2px',
+
+      '& label': {
+        backgroundColor: 'transparent',
+      },
     }),
     fullWidth: css({
       display: 'flex',
