@@ -180,7 +180,6 @@ export class Gauge extends PureComponent<Props> {
               whiteSpace: 'nowrap',
               position: 'relative',
               width: gaugeWidth,
-              top: '-4px',
               cursor: 'default',
             }}
           >
@@ -201,6 +200,9 @@ export class Gauge extends PureComponent<Props> {
           flexDirection: 'column',
           justifyContent: 'center',
           overflow: 'hidden',
+          position: 'relative',
+          left: `-50%`,
+          top: `-50%`,
         }}
         className={this.props.className}
       >
