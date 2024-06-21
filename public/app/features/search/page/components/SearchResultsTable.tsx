@@ -35,7 +35,7 @@ export type TableColumn = Column & {
   field?: Field;
 };
 
-const ROW_HEIGHT = 36; // pixels
+const ROW_HEIGHT = 48; // pixels
 
 export const SearchResultsTable = React.memo(
   ({
@@ -137,7 +137,7 @@ export const SearchResultsTable = React.memo(
         }
 
         return (
-          <div {...row.getRowProps({ style })} className={className}>
+          <div className={className}>
             {row.cells.map((cell: Cell, index: number) => {
               return (
                 <TableCell
@@ -236,14 +236,17 @@ const getStyles = (theme: GrafanaTheme2) => {
     headerCell: css`
       align-items: center;
       display: flex;
-      overflo: hidden;
+      overflow: hidden;
       padding: ${theme.spacing(1)};
     `,
     headerRow: css`
-      background-color: ${theme.colors.background.secondary};
+      background-color: ${theme.colors.background.tertiary};
       display: flex;
       gap: ${theme.spacing(1)};
       height: ${ROW_HEIGHT}px;
+      padding-inline: ${theme.spacing(1)};
+      border-top-left-radius: ${theme.shape.radius.default};
+      border-top-right-radius: ${theme.shape.radius.default};
     `,
     selectedRow: css`
       background-color: ${rowHoverBg};
@@ -254,6 +257,8 @@ const getStyles = (theme: GrafanaTheme2) => {
       gap: ${theme.spacing(1)};
       height: ${ROW_HEIGHT}px;
       label: row;
+      padding-inline: ${theme.spacing(1)};
+
       &:hover {
         background-color: ${rowHoverBg};
       }
@@ -262,6 +267,17 @@ const getStyles = (theme: GrafanaTheme2) => {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      &:nth-child(odd) {
+        background-color: ${theme.colors.background.primary};
+      }
+      &:nth-child(even) {
+        background-color: ${theme.colors.background.secondary};
+      }
+      &:nth-last-child(1) {
+        border-bottom-left-radius: ${theme.shape.radius.default};
+        border-bottom-right-radius: ${theme.shape.radius.default};
       }
     `,
   };
