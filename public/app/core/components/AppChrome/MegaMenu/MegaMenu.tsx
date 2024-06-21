@@ -90,20 +90,6 @@ export const MegaMenu = React.memo(
               <ul className={styles.itemList} aria-label={t('navigation.megamenu.list-label', 'Navigation')}>
                 {navItems.map((link, index) => (
                   <Stack key={link.text} direction={index === 0 ? 'row-reverse' : 'row'} alignItems="center">
-                    {index === 0 && (
-                      <IconButton
-                        id="dock-menu-button"
-                        className={styles.dockMenuButton}
-                        tooltip={
-                          state.megaMenuDocked
-                            ? t('navigation.megamenu.undock', 'Undock menu')
-                            : t('navigation.megamenu.dock', 'Dock menu')
-                        }
-                        name="web-section-alt"
-                        onClick={handleDockedMenu}
-                        variant="secondary"
-                      />
-                    )}
                     <MegaMenuItem
                       link={link}
                       onClick={state.megaMenuDocked ? undefined : onClose}
@@ -114,6 +100,18 @@ export const MegaMenu = React.memo(
               </ul>
             </CustomScrollbar>
           </nav>
+          <IconButton
+            id="dock-menu-button"
+            className={styles.dockMenuButton}
+            tooltip={
+              state.megaMenuDocked
+                ? t('navigation.megamenu.undock', 'Undock menu')
+                : t('navigation.megamenu.dock', 'Dock menu')
+            }
+            name="web-section-alt"
+            onClick={handleDockedMenu}
+            variant="secondary"
+          />
         </div>
       </div>
     );
@@ -178,6 +176,8 @@ const getStyles = (theme: GrafanaTheme2) => ({
   }),
   dockMenuButton: css({
     display: 'none',
+    alignSelf: 'flex-end',
+    margin: theme.spacing(1),
 
     [theme.breakpoints.up('xl')]: {
       display: 'inline-flex',
