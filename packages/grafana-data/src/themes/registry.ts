@@ -31,20 +31,8 @@ export function getBuiltInThemes(includeExtras?: boolean) {
  * There is also a backend list at services/perferences/themes.go
  */
 const themeRegistry = new Registry<ThemeRegistryItem>(() => {
-  return [
-    { id: 'system', name: 'System preference', build: getSystemPreferenceTheme },
-    { id: 'dark', name: 'Dark', build: () => createTheme({ colors: { mode: 'dark' } }) },
-    { id: 'light', name: 'Light', build: () => createTheme({ colors: { mode: 'light' } }) },
-    { id: 'blue-night', name: 'Blue night', build: createBlueNight, isExtra: true },
-    { id: 'midnight', name: 'Midnight', build: createMidnight, isExtra: true },
-  ];
+  return [{ id: 'dark', name: 'Dark', build: () => createTheme({ colors: { mode: 'dark' } }) }];
 });
-
-function getSystemPreferenceTheme() {
-  const mediaResult = window.matchMedia('(prefers-color-scheme: dark)');
-  const id = mediaResult.matches ? 'dark' : 'light';
-  return getThemeById(id);
-}
 
 /**
  * Just a temporary placeholder for a possible new theme
@@ -65,28 +53,6 @@ function createMidnight(): GrafanaTheme2 {
         weak: `rgba(${whiteBase}, 0.17)`,
         medium: `rgba(${whiteBase}, 0.25)`,
         strong: `rgba(${whiteBase}, 0.35)`,
-      },
-    },
-  });
-}
-
-/**
- * Just a temporary placeholder for a possible new theme
- */
-function createBlueNight(): GrafanaTheme2 {
-  return createTheme({
-    name: 'Blue night',
-    colors: {
-      mode: 'dark',
-      background: {
-        canvas: '#15161d',
-        primary: '#15161d',
-        secondary: '#1d1f2e',
-      },
-      border: {
-        weak: `#2e304f`,
-        medium: `#2e304f`,
-        strong: `#2e304f`,
       },
     },
   });

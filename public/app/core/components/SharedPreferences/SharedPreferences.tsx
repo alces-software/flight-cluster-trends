@@ -78,9 +78,6 @@ export class SharedPreferences extends PureComponent<Props, State> {
       value: theme.id,
       label: getTranslatedThemeName(theme),
     }));
-
-    // Add default option
-    this.themeOptions.unshift({ value: '', label: t('shared-preferences.theme.default-label', 'Default') });
   }
 
   async componentDidMount() {
@@ -247,10 +244,6 @@ function getTranslatedThemeName(theme: ThemeRegistryItem) {
   switch (theme.id) {
     case 'dark':
       return t('shared.preferences.theme.dark-label', 'Dark');
-    case 'light':
-      return t('shared.preferences.theme.light-label', 'Light');
-    case 'system':
-      return t('shared.preferences.theme.system-label', 'System preference');
     default:
       return theme.name;
   }
