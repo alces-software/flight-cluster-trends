@@ -234,7 +234,6 @@ function VirtualListRow({ index, style, data }: VirtualListRowProps) {
     >
       {row.cells.map((cell) => {
         const { key, ...cellProps } = cell.getCellProps();
-
         return (
           <div key={key} {...cellProps} className={styles.cell}>
             {cell.render('Cell', { isSelected, onItemSelectionChange, treeID })}
@@ -260,7 +259,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
 
     headerRow: css({
-      backgroundColor: theme.colors.background.secondary,
+      backgroundColor: theme.colors.background.tertiary,
       height: HEADER_HEIGHT,
       borderTopLeftRadius: theme.shape.radius.default,
       borderTopRightRadius: theme.shape.radius.default,
@@ -269,8 +268,15 @@ const getStyles = (theme: GrafanaTheme2) => {
     bodyRow: css({
       height: ROW_HEIGHT,
 
-      '&:hover': {
-        backgroundColor: theme.colors.emphasize(theme.colors.background.primary, 0.03),
+      '&:nth-child(odd)': {
+        backgroundColor: theme.colors.background.primary,
+      },
+      '&:nth-child(even)': {
+        backgroundColor: theme.colors.background.secondary,
+      },
+      '&:nth-last-child(1)': {
+        borderBottomLeftRadius: theme.shape.radius.default,
+        borderBottomRightRadius: theme.shape.radius.default,
       },
     }),
 
@@ -279,12 +285,6 @@ const getStyles = (theme: GrafanaTheme2) => {
       overflow: 'hidden', // Required so flex children can do text-overflow: ellipsis
       display: 'flex',
       alignItems: 'center',
-    }),
-
-    link: css({
-      '&:hover': {
-        textDecoration: 'underline',
-      },
     }),
   };
 };
