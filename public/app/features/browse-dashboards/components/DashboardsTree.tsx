@@ -286,6 +286,11 @@ const getStyles = (theme: GrafanaTheme2) => {
       overflow: 'hidden', // Required so flex children can do text-overflow: ellipsis
       display: 'flex',
       alignItems: 'center',
+
+      '& li': {
+        position: 'relative',
+        top: '-1px',
+      },
     }),
   };
 };
