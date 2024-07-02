@@ -23,7 +23,6 @@ import { getDashboardSrv } from 'app/features/dashboard/services/DashboardSrv';
 import { playlistSrv } from 'app/features/playlist/PlaylistSrv';
 
 import { PanelEditor } from '../panel-edit/PanelEditor';
-import { ShareModal } from '../sharing/ShareModal';
 import { DashboardInteractions } from '../utils/interactions';
 import { DynamicDashNavButtonModel, dynamicDashNavActions } from '../utils/registerDynamicDashNavAction';
 
@@ -301,27 +300,6 @@ export function ToolbarActions({ dashboard }: Props) {
         data-testid={selectors.components.NavToolbar.editDashboard.backToDashboardButton}
       >
         Back to dashboard
-      </Button>
-    ),
-  });
-
-  toolbarActions.push({
-    group: 'main-buttons',
-    condition: uid && !isEditing && !meta.isSnapshot && !isPlaying,
-    render: () => (
-      <Button
-        key="share-dashboard-button"
-        tooltip={t('dashboard.toolbar.share', 'Share dashboard')}
-        size="sm"
-        className={styles.buttonWithExtraMargin}
-        fill="outline"
-        onClick={() => {
-          DashboardInteractions.toolbarShareClick();
-          dashboard.showModal(new ShareModal({ dashboardRef: dashboard.getRef() }));
-        }}
-        data-testid={selectors.components.NavToolbar.shareDashboard}
-      >
-        Share
       </Button>
     ),
   });

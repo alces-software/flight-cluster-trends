@@ -41,7 +41,6 @@ import {
 
 import { DashNavButton } from './DashNavButton';
 import { DashNavTimeControls } from './DashNavTimeControls';
-import { ShareButton } from './ShareButton';
 
 const mapDispatchToProps = {
   setStarred,
@@ -322,10 +321,6 @@ export const DashNav = React.memo<Props>((props) => {
           key="panel-add-dropdown"
         />
       );
-    }
-
-    if (canShare) {
-      buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 
     // if the timepicker is hidden, we don't need to add this separator
