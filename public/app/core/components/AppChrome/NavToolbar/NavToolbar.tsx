@@ -50,12 +50,6 @@ export function NavToolbar({ actions, sectionNav, pageNav, onToggleMegaMenu, onT
       <Breadcrumbs breadcrumbs={breadcrumbs} className={styles.breadcrumbsWrapper} />
       <div className={styles.actions}>
         {actions}
-        <ToolbarButton
-          onClick={onToggleKioskMode}
-          narrow
-          title={t('navigation.toolbar.enable-kiosk', 'Enable kiosk mode')}
-          icon="monitor"
-        />
       </div>
     </div>
   );
