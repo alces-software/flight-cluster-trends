@@ -100,18 +100,6 @@ export const MegaMenu = React.memo(
               </ul>
             </CustomScrollbar>
           </nav>
-          <IconButton
-            id="dock-menu-button"
-            className={styles.dockMenuButton}
-            tooltip={
-              state.megaMenuDocked
-                ? t('navigation.megamenu.undock', 'Undock menu')
-                : t('navigation.megamenu.dock', 'Dock menu')
-            }
-            name="web-section-alt"
-            onClick={handleDockedMenu}
-            variant="secondary"
-          />
         </div>
       </div>
     );
