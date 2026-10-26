@@ -967,7 +967,9 @@
    },
    "type": "object"
   },
-  "EvalQueriesResponse": {},
+  "EvalQueriesResponse": {
+   "type": "object"
+  },
   "ExplorePanelsState": {
    "description": "This is an object constructed with the keys as the values of the enum VisType and the value being a bag of properties"
   },
@@ -3655,6 +3657,20 @@
    },
    "type": "object"
   },
+  "SilenceMetadata": {
+   "properties": {
+    "folder_uid": {
+     "type": "string"
+    },
+    "rule_title": {
+     "type": "string"
+    },
+    "rule_uid": {
+     "type": "string"
+    }
+   },
+   "type": "object"
+  },
   "SlackAction": {
    "description": "See https://api.slack.com/docs/message-attachments#action_fields and https://api.slack.com/docs/message-buttons\nfor more information.",
    "properties": {
@@ -4459,9 +4475,9 @@
    "type": "object"
   },
   "alertGroups": {
-   "description": "AlertGroups alert groups",
    "items": {
-    "$ref": "#/definitions/alertGroup"
+    "$ref": "#/definitions/alertGroup",
+    "type": "object"
    },
    "type": "array"
   },
@@ -4564,48 +4580,6 @@
    "type": "object"
   },
   "gettableAlert": {
-   "properties": {
-    "annotations": {
-     "$ref": "#/definitions/labelSet"
-    },
-    "endsAt": {
-     "description": "ends at",
-     "format": "date-time",
-     "type": "string"
-    },
-    "fingerprint": {
-     "description": "fingerprint",
-     "type": "string"
-    },
-    "generatorURL": {
-     "description": "generator URL\nFormat: uri",
-     "format": "uri",
-     "type": "string"
-    },
-    "labels": {
-     "$ref": "#/definitions/labelSet"
-    },
-    "receivers": {
-     "description": "receivers",
-     "items": {
-      "$ref": "#/definitions/receiver"
-     },
-     "type": "array"
-    },
-    "startsAt": {
-     "description": "starts at",
-     "format": "date-time",
-     "type": "string"
-    },
-    "status": {
-     "$ref": "#/definitions/alertStatus"
-    },
-    "updatedAt": {
-     "description": "updated at",
-     "format": "date-time",
-     "type": "string"
-    }
-   },
    "required": [
     "labels",
     "annotations",
@@ -4621,46 +4595,37 @@
   "gettableAlerts": {
    "description": "GettableAlerts gettable alerts",
    "items": {
-    "$ref": "#/definitions/gettableAlert"
+    "$ref": "#/definitions/gettableAlert",
+    "type": "object"
+   },
+   "type": "array"
+  },
+  "gettableGrafanaSilence": {
+   "properties": {
+    "accessControl": {
+     "additionalProperties": {
+      "type": "boolean"
+     },
+     "example": {
+      "create": false,
+      "read": true,
+      "write": false
+     },
+     "type": "object"
+    },
+    "metadata": {
+     "$ref": "#/definitions/SilenceMetadata"
+    }
+   },
+   "type": "object"
+  },
+  "gettableGrafanaSilences": {
+   "items": {
+    "$ref": "#/definitions/gettableGrafanaSilence"
    },
    "type": "array"
   },
   "gettableSilence": {
-   "properties": {
-    "comment": {
-     "description": "comment",
-     "type": "string"
-    },
-    "createdBy": {
-     "description": "created by",
-     "type": "string"
-    },
-    "endsAt": {
-     "description": "ends at",
-     "format": "date-time",
-     "type": "string"
-    },
-    "id": {
-     "description": "id",
-     "type": "string"
-    },
-    "matchers": {
-     "$ref": "#/definitions/matchers"
-    },
-    "startsAt": {
-     "description": "starts at",
-     "format": "date-time",
-     "type": "string"
-    },
-    "status": {
-     "$ref": "#/definitions/silenceStatus"
-    },
-    "updatedAt": {
-     "description": "updated at",
-     "format": "date-time",
-     "type": "string"
-    }
-   },
    "required": [
     "comment",
     "createdBy",
@@ -4674,13 +4639,14 @@
    "type": "object"
   },
   "gettableSilences": {
-   "description": "GettableSilences gettable silences",
    "items": {
-    "$ref": "#/definitions/gettableSilence"
+    "$ref": "#/definitions/gettableSilence",
+    "type": "object"
    },
    "type": "array"
   },
   "integration": {
+   "description": "Integration integration",
    "properties": {
     "lastNotifyAttempt": {
      "description": "A timestamp indicating the last attempt to deliver a notification regardless of the outcome.\nFormat: date-time",
@@ -4824,6 +4790,7 @@
    "type": "array"
   },
   "postableSilence": {
+   "description": "PostableSilence postable silence",
    "properties": {
     "comment": {
      "description": "comment",
